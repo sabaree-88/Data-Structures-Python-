@@ -1,89 +1,53 @@
-class Node:
+class BST:
     def __init__(self,key):
         self.key=key
         self.left=None
         self.right=None
-
-#Inorder Traversal
-def inorder(root):
-    if root is not None:
-        inorder(root.left)
-
-        print(str(root.key)+"->",end=" ")
-
-        inorder(root.right)
-
-
-#insert function
-def insert(node,key):
-    if node is None:
-        return Node(key)
-
-    if key<node.key:
-        node.left=insert(node.left,key)
     
-    else:
-        node.right=insert(node.right,key)
-
-    return node
-
-
-#find inorder successor
-
-def minValueNode(node):
-    current=node
-    while (current.left is not None):
-        current=current.left
-
-    return current
-
-#deletion
-
-def deleteNode(root,key):
-    if root is None:
-        return root
-
-    if key<root.key:
-        root.left=deleteNode(root.left,key)
-
-    elif key>root.key:
-        root.right=deleteNode(root.right,key)
-
-    else:
-        #node having only one child or no child
-        if root.left is None:
-            temp=root.right
-            root=None
-            return temp
-
-        elif root.right is None:
-            temp=root.left
-            root=None
-            return temp
-
-        #if the node has two childern , place the inorder successor in position
-
-        temp=minValueNode(root.right)
-        root.key=temp.key
-        root.right=deleteNode(root.right,temp.key)
-        temp=minValueNode(root.left)
-        root.key=temp.key
-        root.left=deleteNode(root.left,temp.key)
+    #insert function
+    def insert(self,data):
+        #tree is empty
+        if self.key is None:
+            self.key = data
+            return
+        #tree has the one or two node check the condition (decide which position to insert the new node (left or right))
+        if self.key>data:
+            if self.left:
+                self.left.insert(data)
+            else:
+                self.left=BST(data)
+        else:
+            if self.right:
+                self.right.insert(data)
+            else:
+                self.right=BST(data)
+    #searching
+    def search(self,data):
+        if self.key == data:
+            print("Node is FOUND!")
+            return
+        if data < self.key:
+            if self.left:
+                self.left.search(data)
+            else:
+                print("Node is not present in the Tree!")
+        else:
+            if self.right:
+                self.right.search(data)
+            else:
+                print("Node is not present in the Node")
 
 
-    return root
+    def inorder(self):
+        if self.left:
+            self.left.inorder()
+        print(self.key,end=" ")
+        if self.right:
+            self.right.inorder()
 
-
-root=Node(5)
-root=insert(root,10)
-root=insert(root,3)
-root=insert(root,4)
-root=insert(root,2)
-root=insert(root,7)
-root=insert(root,8)
-
-inorder(root)
-print("\n")
-root=deleteNode(root,7)
-print("\n")
-inorder(root)
+root=BST(None)
+root.insert(20)
+root.insert(5)
+root.insert(25)
+root.inorder()
+root.search(6)
