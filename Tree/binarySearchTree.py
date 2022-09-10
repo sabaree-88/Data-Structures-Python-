@@ -1,3 +1,6 @@
+from tkinter import N
+
+
 class BST:
     def __init__(self,key):
         self.key=key
@@ -87,26 +90,25 @@ class BST:
         if self.right:
             self.right.postorder()
         print(self.key,end=" ")
-
+def count(node):
+    if node is None:
+        return 0
+    return 1+count(node.left)+count(node.right)
     
 root=BST(15) 
-root.insert(20)
-root.insert(5)
-root.insert(25)
+root.insert(31)
 root.insert(23)
-root.insert(34)
-root.insert(21)
+root.insert(76)
+root.insert(90)
 root.insert(12)
-root.insert(1)
-print()
-root.search(5)
-print()
+root.insert(10)
+root.insert(8)
+root.insert(3)    
+print("inorder")
 root.inorder()
 print()
+print("preorder")
 root.preorder()
 print()
+print("postorder")
 root.postorder()
-print()
-root.delete(23)
-print()
-root.inorder()
