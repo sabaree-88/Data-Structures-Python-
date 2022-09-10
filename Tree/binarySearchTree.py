@@ -44,10 +44,35 @@ class BST:
         print(self.key,end=" ")
         if self.right:
             self.right.inorder()
+    
+    def preorder(self):
+        print(self.key,end=" ")
+        if self.left:
+            self.left.preorder()
+        if self.right:
+            self.right.preorder()
 
-root=BST(None)
+    def postorder(self):
+        if self.left:
+            self.left.postorder()
+        if self.right:
+            self.right.postorder()
+        print(self.key,end=" ")
+
+root=BST(15)
 root.insert(20)
 root.insert(5)
 root.insert(25)
+root.insert(23)
+root.insert(34)
+root.insert(21)
+root.insert(12)
+root.insert(1)
+print()
+root.search(5)
+print()
 root.inorder()
-root.search(6)
+print()
+root.preorder()
+print()
+root.postorder()
