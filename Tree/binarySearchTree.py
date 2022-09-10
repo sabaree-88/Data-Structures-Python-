@@ -37,7 +37,36 @@ class BST:
             else:
                 print("Node is not present in the Node")
 
-
+    #deletion
+    def delete(self,data):
+        if self.key is None:
+            print("Tree is empty!")
+            return
+        if data < self.key:
+            if self.left:
+                self.left=self.left.delete(data)
+            else:
+                print("The given node is not present in the tree!")
+        elif data > self.key:
+            if self.right:
+                self.right=self.right.delete(data)
+            else:
+                print("The given node is not present in the tree!")
+        else:
+            if self.left is None:
+                temp=self.right
+                self=None
+                return temp
+            if self.right is None:
+                temp=self.left
+                self=None
+                return temp
+            node = self.right
+            while self.left:
+                node=self.left
+            self.key = node.key
+            self.right = self.right.delete(node.key)
+        return self
     def inorder(self):
         if self.left:
             self.left.inorder()
@@ -59,7 +88,8 @@ class BST:
             self.right.postorder()
         print(self.key,end=" ")
 
-root=BST(15)
+    
+root=BST(15) 
 root.insert(20)
 root.insert(5)
 root.insert(25)
@@ -76,3 +106,7 @@ print()
 root.preorder()
 print()
 root.postorder()
+print()
+root.delete(23)
+print()
+root.inorder()
